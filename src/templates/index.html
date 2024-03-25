@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block content %}
+    <style>
+        #cover h1 {
+            font-family: "Roboto", sans-serif; 
+            font-size: 3rem;
+            color: #333;
+        }
+    </style>
+
+    <!-- COVER TITLE -->
+    <div class="jumbotron text-center" id="cover">
+        <h1>Welcome to MediaShack</h1>
+    </div>
+
+    <!-- VIDEO LISTING CONTAINER -->
+    <div class="container text-center" 
+         id="videolisting"
+         hx-get="/page?current_page={{ current_page }}&per_page={{ per_page }}&total_pages={{ total_pages }}"
+         hx-target="this"
+         hx-swap="innerHTML"
+         hx-trigger="load"
+        >
+    </div>
+
+{% endblock %}

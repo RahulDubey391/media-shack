@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block content %}
+    <div class="container">
+        <div class="embed-responsive embed-responsive-16by9">
+            <!-- <iframe class="embed-responsive-item" src="{{ url }}" ></iframe> -->
+            <video controls class="embed-responsive-item">
+                <source src="{{ url_for('static', filename='videos/'+url) }}" type="video/mp4">
+            </video>
+        </div>
+
+        <h3>{{ video }}</h3>
+    </div>
+{% endblock %}

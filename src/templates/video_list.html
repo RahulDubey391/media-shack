@@ -1,0 +1,40 @@
+<div class="container w-75">
+    <ul class="list-group">
+        {% for vid in videos %}
+            <li class="list-group-item">
+                <div class="card">
+                    <div class="card-body">
+                        <a href="{{ url_for('core.getVidPlayer', video_name=vid.title, url=vid.url) }}">
+                            <img class="card-img-top" style="width: 300px;height: 300px; object-fit: cover;" src="{{ url_for('static', filename='images/' + vid.thumbnail) }}">
+                        </a>
+                        <h5 class="card-title">{{ vid.title}}</h5>
+                    </div>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+
+    <nav aria-label="Page navigation" style="margin-top: 20px;">
+        <ul class="pagination justify-content-center">
+
+            <li class="page-item">
+                <a class="page-link" href="#" hx-get="/page?current_page={{ current_page - 1 }}&per_page={{ per_page }}&total_pages={{ total_pages }}" hx-swap="innerHTML" hx-target="#videolisting">Previous</a>
+            </li>
+
+            <li class="page-item">
+                <a class="page-link" href="#" hx-get="/page?current_page={{ current_page + 1 }}&per_page={{ per_page }}&total_pages={{ total_pages }}" hx-swap="innerHTML" hx-target="#videolisting">Next</a>
+            </li>
+    
+        </ul>
+    </nav>
+
+    <!-- Notification Area -->
+    <div id="notification" style="margin-top: 20px;">
+        {% if current_page < 1 or current_page > total_pages %}
+            <div class="alert alert-danger" role="alert">
+                Page limit exceeded. This page doesn't exist.
+            </div>
+        {% endif %}
+    </div>
+
+</div>
