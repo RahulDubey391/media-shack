@@ -1,12 +1,16 @@
+<!-- templates/register.html -->
+
 {% extends "base.html" %}
+
 {% block content %}
 <form method="POST">
     {# This hidden_tag is a CSRF security feature. #}
     {{ form.hidden_tag() }}
-    {{ form.email.label }} {{ form.email() }}<br>
-    {{ form.username.label }} {{ form.username() }}<br>
-    {{ form.password.label }} {{ form.password() }}<br>
-    {{ form.pass_confirm.label }} {{ form.pass_confirm() }}<br>
+    {{ form.email.label }} {{ form.email(size=32) }}<br>
+    {{ form.username.label }} {{ form.username(size=32) }}<br>
+    {{ form.password.label }} {{ form.password(size=32) }}<br>
+    {{ form.pass_confirm.label }} {{ form.pass_confirm(size=32) }}<br>
+    {{ form.is_admin.label }} {{ form.is_admin() }} Register as Admin<br>
     {{ form.submit() }}
 </form>
 {% endblock %}

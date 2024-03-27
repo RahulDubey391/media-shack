@@ -12,37 +12,44 @@ def register():
     form = RegistrationForm()
 
     if form.validate_on_submit():
-        user = User(email=form.email.data,
-                    username=form.username.data,
-                    password=form.password.data)
+        existing_user = User.query.filter_by(username=form.username.data).first()
+        if existing_user:
+            flash('Username already exists. Please choose a different username.', 'error')
+            return redirect(url_for('users.register'))
+
+        user = User(
+            email=form.email.data,
+            username=form.username.data,
+            password=form.password.data,
+            is_admin=form.is_admin.data
+        )
 
         db.session.add(user)
         db.session.commit()
         flash('Thanks for registering! Now you can login!')
         return redirect(url_for('users.login'))
+    
     return render_template('register.html', form=form)
 
 @users.route('/login', methods=['GET', 'POST'])
 def login():
-
     form = LoginForm()
+
     if form.validate_on_submit():
         user = User.query.filter_by(email=form.email.data).first()
 
-        if user.check_password(form.password.data) and user is not None:
+        if user and user.check_password(form.password.data):
             login_user(user)
-            flash('Logged in successfully.')
 
-            # If a user was trying to visit a page that requires a login
-            # flask saves that URL as 'next'.
-            next = request.args.get('next')
+            if form.is_admin.data and user.is_admin:
+                # If logging in as admin and user is admin, redirect to admin dashboard
+                return redirect(url_for('admin.dashboard'))
+            else:
+                # If logging in as regular user or user is not admin, redirect to regular user dashboard
+                return redirect(url_for('core.index'))
 
-            # So let's now check if that next exists, otherwise we'll go to
-            # the welcome page.
-            if next == None or not next[0]=='/':
-                next = url_for('core.index')
+        flash('Invalid email or password.', 'error')
 
-            return redirect(next)
     return render_template('login.html', form=form)
 
 
