@@ -15,20 +15,21 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['UPLOAD_FOLDER'] = os.path.join(basedir, 'static', 'uploads')
 
 db = SQLAlchemy(app)
+#db.init_app(app)
 Migrate(app,db)
 
 login_manager = LoginManager()
 login_manager.init_app(app)
 login_manager.login_view = "users.login"
 
+
+
 from src.users.views import users
-app.register_blueprint(users)
-
 from src.admin.views import admin
-app.register_blueprint(admin)
-
 from src.error_pages.views import error_pages
-app.register_blueprint(error_pages)
-
 from src.core.views import core
+app.register_blueprint(users)
+app.register_blueprint(admin)
+app.register_blueprint(error_pages)
 app.register_blueprint(core)
+

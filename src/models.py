@@ -30,7 +30,7 @@ class User(db.Model, UserMixin):
     is_admin = db.Column(db.Boolean, default=False) 
 
     # This connects BlogPosts to a User Author.
-    posts = db.relationship('MediaPost', backref='author', lazy=True)
+    posts = db.relationship('MediaPost', back_populates='author', lazy=True)
 
     def __init__(self, email, username, password,  is_admin=False):
         self.email = email
@@ -48,7 +48,7 @@ class User(db.Model, UserMixin):
 class MediaPost(db.Model):
     __tablename__ = 'mediaposts'
 
-    users = db.relationship(User)
+    author = db.relationship('User', back_populates='posts')
 
     content_id = db.Column(db.String(20), primary_key=True)  # Using content_id as the primary key
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'), nullable=False)

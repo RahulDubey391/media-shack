@@ -5,7 +5,7 @@
                 <div class="card">
                     <div class="card-body">
                         <a href="{{ url_for('core.getVidPlayer', video_name=vid.title, url=vid.url) }}">
-                            <img class="card-img-top" style="width: 300px;height: 300px; object-fit: cover;" src="{{ url_for('static', filename='images/' + vid.thumbnail) }}">
+                            <img class="card-img-top" style="width: 300px;height: 300px; object-fit: cover;" src="{{ url_for('static', filename='uploads/' + vid.thumbnail) }}">
                         </a>
                         <h5 class="card-title">{{ vid.title}}</h5>
                     </div>
