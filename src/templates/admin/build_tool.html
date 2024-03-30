@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+<div>
+    <h1>Builder Tool</h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <!-- Left space for uploading an image -->
+                <h3>Upload Image</h3>
+                
+                <form id="uploadForm">
+                    <input type="file" name="file" id="file" class="form-control">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="bg-primary p-3">
+                <p>This is the left box content.</p>
+            </div>
+
+            <div class="col-md-6">
+                <!-- Right space for displaying the uploaded image -->
+                <h3>Output</h3>
+                <div id="output"></div>
+            </div>
+            <div class="bg-secondary p-3">
+                <p>This is the right box content.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -29,7 +29,7 @@ class User(db.Model, UserMixin):
     password_hash = db.Column(db.String(128))
     is_admin = db.Column(db.Boolean, default=False) 
 
-    # This connects BlogPosts to a User Author.
+    # This connects MediaPost to a User Author.
     posts = db.relationship('MediaPost', back_populates='author', lazy=True)
 
     def __init__(self, email, username, password,  is_admin=False):

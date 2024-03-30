@@ -1,9 +1,13 @@
+{% extends "base.html"%}
+{% block content %}
 <div>
     <h1>Welcome to Admin Dashboard</h1>
     <p>You have access to admin functionalities.</p>
     <ul>
         <li><a href="{{ url_for('admin.add_content') }}">Add New Content</a></li>
+        <li><a href="{{ url_for('admin.builder') }}">Builder Tool</a></li>
         <!-- Add more admin functionalities as needed -->
     </ul>
-    <a href="{{ url_for('users.logout') }}">Logout</a>
 </div>
+
+{% endblock %}

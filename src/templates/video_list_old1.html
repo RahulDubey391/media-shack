@@ -1,27 +1,30 @@
 <div class="container w-75">
-    <div class="row">
+    <ul class="list-group">
         {% for vid in videos %}
-            <div class="col-md-3 mb-4">
-                <div class="card h-100">
+            <li class="list-group-item">
+                <div class="card">
                     <div class="card-body">
                         <a href="{{ url_for('core.getVidPlayer', video_name=vid.title, url=vid.url) }}">
-                            <img class="card-img-top" style="width: 100%; height: auto; object-fit: cover;" src="{{ url_for('static', filename='uploads/' + vid.thumbnail) }}">
+                            <img class="card-img-top" style="width: 300px;height: 300px; object-fit: cover;" src="{{ url_for('static', filename='uploads/' + vid.thumbnail) }}">
                         </a>
-                        <h5 class="card-title">{{ vid.title[:30] + '...' if vid.title|length > 30 else vid.title }}</h5>
+                        <h5 class="card-title">{{ vid.title}}</h5>
                     </div>
                 </div>
-            </div>
+            </li>
         {% endfor %}
-    </div>
+    </ul>
 
     <nav aria-label="Page navigation" style="margin-top: 20px;">
         <ul class="pagination justify-content-center">
+
             <li class="page-item">
                 <a class="page-link" href="#" hx-get="/page?current_page={{ current_page - 1 }}&per_page={{ per_page }}&total_pages={{ total_pages }}" hx-swap="innerHTML" hx-target="#videolisting">Previous</a>
             </li>
+
             <li class="page-item">
                 <a class="page-link" href="#" hx-get="/page?current_page={{ current_page + 1 }}&per_page={{ per_page }}&total_pages={{ total_pages }}" hx-swap="innerHTML" hx-target="#videolisting">Next</a>
             </li>
+    
         </ul>
     </nav>
 
@@ -33,4 +36,5 @@
             </div>
         {% endif %}
     </div>
+
 </div>

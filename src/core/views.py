@@ -33,7 +33,7 @@ def loadGallery(page, per_page):
 
 @core.route('/', methods=['GET'])
 def index():
-    per_page = 5
+    per_page = 50
     total_pages = math.ceil(MediaPost.query.count() / per_page)
     current_page = int(request.args.get('page', 1))
 

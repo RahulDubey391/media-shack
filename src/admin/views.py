@@ -18,6 +18,12 @@ admin = Blueprint('admin', __name__)
 def dashboard():
     return render_template('admin/dashboard.html')
 
+@admin.route('/builder')
+@login_required
+@admin_required
+def builder():
+    return render_template('admin/build_tool.html')
+
 @admin.route('/add_content', methods=['GET', 'POST'])
 @login_required
 @admin_required
