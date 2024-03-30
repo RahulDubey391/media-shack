@@ -10,3 +10,4 @@ Flask-Migrate
 Flask-Login
 Flask-WTF
 WTForms
+pillow
