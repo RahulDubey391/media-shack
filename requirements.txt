@@ -5,3 +5,8 @@ itsdangerous
 Jinja2
 MarkupSafe
 Werkzeug
+Flask-SQLAlchemy
+Flask-Migrate
+Flask-Login
+Flask-WTF
+WTForms
